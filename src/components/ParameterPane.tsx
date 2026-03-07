@@ -5,6 +5,7 @@ import { TerminalCommand } from "./TerminalCommand";
 import { useForm } from "react-hook-form";
 import type { UseFormRegister, FieldError } from "react-hook-form";
 import { BinaryEncoder, bufferToHex } from "../utils/beacon_generate";
+import Markdown from "react-markdown";
 
 function buildRules(param: BofArg) {
   const rules: Record<string, unknown> = {};
@@ -92,7 +93,11 @@ function ParameterInput({ param, register, error }: ParameterInputProps) {
       input = (
         <Form.Control
           type="text"
-          placeholder={param.name}
+          placeholder={
+            param.default === "" && !param.required
+              ? '"<empty string>"'
+              : param.name
+          }
           defaultValue={param.default}
           {...register(param.name, rules)}
         />
@@ -149,7 +154,9 @@ function ParameterInput({ param, register, error }: ParameterInputProps) {
 
       {error && <p className="text-danger small">{error.message}</p>}
 
-      <Form.Text>{/* <Markdown>{param.description}</Markdown> */}</Form.Text>
+      <Form.Text>
+        {param.description && <Markdown>{param.description}</Markdown>}
+      </Form.Text>
     </Form.Group>
   );
 }
