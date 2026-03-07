@@ -1300,8 +1300,8 @@
           "description": "Group to get members of (set `type` to `1`)",
           "required": false,
           "default": "",
-          "validator": "regex",
-          "validator_type": ".+"
+          "validator": ".*",
+          "validator_type": "regex"
         }
       ]
     },
@@ -1355,8 +1355,8 @@
           "description": "Group to get members of (set `type` to `1`)",
           "required": true,
           "default": "",
-          "validator": "regex",
-          "validator_type": ".+"
+          "validator": "[^\\s]+",
+          "validator_type": "regex"
         }
       ]
     },
@@ -1388,29 +1388,29 @@
         {
           "name": "type",
           "type": "Short",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Set to `0`: List groups, `1`: List members of group.",
+          "required": false,
+          "default": "0",
+          "validator": [0, 1],
+          "validator_type": "choice"
         },
         {
           "name": "server",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Server to list groups on (empty for local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "group",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Group to get members of (set `type` to `1`)",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ".*",
+          "validator_type": "regex"
         }
       ]
     },
@@ -1442,29 +1442,29 @@
         {
           "name": "type",
           "type": "Short",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Set to `0`: List groups, `1`: List members of group.",
+          "required": false,
+          "default": "1",
+          "validator": [0, 1],
+          "validator_type": "choice"
         },
         {
           "name": "server",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Server to retrieve group members on (empty for local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "group",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Group to get members of (set `type` to `1`)",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "[^\\s]+",
+          "validator_type": "regex"
         }
       ]
     },
@@ -1496,20 +1496,20 @@
         {
           "name": "server",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Server to retrieve group members on (empty for local system).",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ".*",
+          "validator_type": "regex"
         },
         {
           "name": "group",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Group to get members of.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "[^\\s]+",
+          "validator_type": "regex"
         }
       ]
     },
@@ -1538,11 +1538,11 @@
         {
           "name": "servername",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "System to query for logged on users.",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1572,11 +1572,11 @@
         {
           "name": "servername",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "System to query for logged on users.",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1606,11 +1606,11 @@
         {
           "name": "hostname",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "System to get the sessions from.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "[^\\s]+",
+          "validator_type": "regex"
         }
       ]
     },
@@ -1652,29 +1652,29 @@
         {
           "name": "hostname",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "System to get the sessions from.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "[^\\s]+",
+          "validator_type": "regex"
         },
         {
           "name": "resolveMethod",
           "type": "Short",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Resolution method: `0`: DNS or `1`:NetWkstaGetInfo.",
+          "required": false,
+          "default": "1",
+          "validator": [0, 1],
+          "validator_type": "choice"
         },
         {
           "name": "dnsserver",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "DNS server to use for resolving `hostname`. Required if `resolveMethos` is set to `1`.",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1704,20 +1704,20 @@
         {
           "name": "sharename",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "System to query for shares (default local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "asAdmin",
           "type": "Int",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Hardcoded to `0`",
+          "required": false,
+          "default": "0",
+          "validator": [0],
+          "validator_type": "choice"
         }
       ]
     },
@@ -1747,20 +1747,20 @@
         {
           "name": "sharename",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "System to query for shares (default local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "asAdmin",
           "type": "Int",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Hardcoded to `1`",
+          "required": false,
+          "default": "1",
+          "validator": [1],
+          "validator_type": "choice"
         }
       ]
     },
