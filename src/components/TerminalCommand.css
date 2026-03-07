@@ -1,0 +1,26 @@
+.terminal-wrapper {
+  position: relative;
+  display: inline-block; 
+}
+
+.terminal-block {
+  background: var(--bs-dark-bg-subtle);
+  color: var(--bs-secondary-color); 
+  border-radius: var(--bs-border-radius);
+  font-family: var(--bs-font-monospace);
+}
+
+.copy-btn {
+  position: absolute;
+  top: calc( var(--bs-body-font-size) / 2);
+  right: calc( var(--bs-body-font-size) / 2);
+  background: transparent;
+  border: none;
+  font-size: var(--bs-body-font-size);
+  color: var(--bs-secondary-color); 
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+.copy-btn:hover {
+  color: var(--bs-tertiary-color);
+}

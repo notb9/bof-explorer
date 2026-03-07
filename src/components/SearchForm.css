@@ -1,0 +1,37 @@
+.dropdown-scroll {
+  max-height: 260px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: var(--bs-bg-color);
+}
+
+.dropdown-container {
+  /* border: var(--bs-border-width) solid var(--bs-border-color); */
+  margin-top: calc(-1 * var(--bs-border-width));
+}
+
+.dropdown-msg {
+  /* Makes it so it is connected to the dropdown */
+  margin-top: calc(-1 * var(--bs-list-group-border-width));
+  /* Make the item smaller */
+  font-size: calc(0.75 * var(--bs-body-font-size)) !important;
+}
+
+/* Add hover coloring / animation */
+.dropdown-scroll > .list-group-item:hover {
+  background-color: var(--bs-list-group-active-bg);
+  color: var(--bs-list-group-active-color);
+  border-color: var(--bs-list-group-active-border-color);
+  border-width: var(--bs-list-group-border-width);
+  cursor: pointer;
+}
+
+.bof-search-input:focus {
+  box-shadow: 0 0 0 0 #000 !important;
+  border-color: var(--bs-border-color) !important;
+  border-bottom-left-radius: 0;
+}
+.bof-search-input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}

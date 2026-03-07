@@ -1,0 +1,5 @@
+.banner-ascii-art {
+  white-space: pre-wrap;
+  font-family: var(--bs-font-monospace);
+  text-align: center;
+}

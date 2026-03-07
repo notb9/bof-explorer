@@ -1,0 +1,22 @@
+.app-layout {
+  min-height: 100vh;
+  transition: padding-top 0.3s ease;
+}
+
+.app-panel {
+  max-width: 900px !important;
+  width: 100%;
+}
+
+.tab-content {
+  border-left: var(--bs-border-width) solid var(--bs-border-color);
+  border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+  border-right: var(--bs-border-width) solid var(--bs-border-color);
+  border-bottom-left-radius: var(--bs-border-radius);
+  border-bottom-right-radius: var(--bs-border-radius);
+  box-sizing: border-box;
+}
+
+.bof-usage {
+  white-space: pre-wrap;
+}
