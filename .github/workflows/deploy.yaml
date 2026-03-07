@@ -31,3 +31,6 @@ jobs:
 
 permissions:
   contents: write
+
+with:
+  cname: bof-explorer.maldev.nl
