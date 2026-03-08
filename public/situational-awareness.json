@@ -1279,10 +1279,10 @@
         {
           "name": "type",
           "type": "Short",
-          "description": "Set to `0`: List groups, `1`: List members of group.",
+          "description": "Hardcoded to `0`.",
           "required": false,
           "default": "0",
-          "validator": [0, 1],
+          "validator": [0],
           "validator_type": "choice"
         },
         {
@@ -1297,10 +1297,10 @@
         {
           "name": "group",
           "type": "UnicodeString",
-          "description": "Group to get members of (set `type` to `1`)",
+          "description": "Must be empty (ignored)",
           "required": false,
           "default": "",
-          "validator": ".*",
+          "validator": "^$",
           "validator_type": "regex"
         }
       ]
@@ -1334,10 +1334,10 @@
         {
           "name": "type",
           "type": "Short",
-          "description": "Set to `0`: List groups, `1`: List members of group.",
+          "description": "Hardcoded to `1`.",
           "required": false,
           "default": "1",
-          "validator": [0, 1],
+          "validator": [1],
           "validator_type": "choice"
         },
         {
@@ -1388,10 +1388,10 @@
         {
           "name": "type",
           "type": "Short",
-          "description": "Set to `0`: List groups, `1`: List members of group.",
+          "description": "Hardcoded to `0`",
           "required": false,
           "default": "0",
-          "validator": [0, 1],
+          "validator": [0],
           "validator_type": "choice"
         },
         {
@@ -1406,10 +1406,10 @@
         {
           "name": "group",
           "type": "UnicodeString",
-          "description": "Group to get members of (set `type` to `1`)",
+          "description": "Must be empty (ignored)",
           "required": false,
           "default": "",
-          "validator": ".*",
+          "validator": "^$",
           "validator_type": "regex"
         }
       ]
@@ -1442,10 +1442,10 @@
         {
           "name": "type",
           "type": "Short",
-          "description": "Set to `0`: List groups, `1`: List members of group.",
+          "description": "Hardcoded to `1`.",
           "required": false,
           "default": "1",
-          "validator": [0, 1],
+          "validator": [1],
           "validator_type": "choice"
         },
         {
@@ -1670,7 +1670,7 @@
         {
           "name": "dnsserver",
           "type": "AnsiString",
-          "description": "DNS server to use for resolving `hostname`. Required if `resolveMethos` is set to `1`.",
+          "description": "DNS server to use for resolving `hostname`. Required if `resolveMethod` is set to `1`.",
           "required": false,
           "default": "",
           "validator": "",
@@ -1821,11 +1821,11 @@
         {
           "name": "servername",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Server to query for time (default: localhost on empty string).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1856,11 +1856,11 @@
         {
           "name": "servername",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Server to query for uptime (default: localhost on empty string).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1901,56 +1901,65 @@
         {
           "name": "cmd",
           "type": "Short",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Hardcoded to `1`",
+          "required": false,
+          "default": "1",
+          "validator": [1],
+          "validator_type": "choice"
         },
         {
           "name": "pswzShareName",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Name of the share to connect (format: `\\\\<computername>\\<sharename>`.",
           "required": true,
           "default": "",
+          "validator": "^\\\\\\\\[^\\\\]+(\\\\[^\\\\]+)+$",
+          "validator_type": "regex"
+        },
+        {
+          "name": "pswzUsername",
+          "type": "UnicodeString",
+          "description": "Username to use for the connect. (Default: empty for current process token).",
+          "required": false,
+          "default": "0",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
+        },
+        {
+          "name": "pswzPassword",
+          "type": "UnicodeString",
+          "description": "Password to use for the connect. (Default: empty for current process token).",
+          "required": false,
+          "default": "",
+          "validator": "",
+          "validator_type": ""
+        },
+        {
+          "name": "pswzDeviceName",
+          "type": "UnicodeString",
+          "description": "Drive letter to mount the share to (e.g. `X:`).",
+          "required": false,
+          "default": "",
+          "validator": "^$|^[A-Z]:$",
+          "validator_type": "regex"
         },
         {
           "name": "persist",
-          "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "type": "Short",
+          "description": "Set to `1` to persist the connection (default: `0`).",
+          "required": false,
+          "default": "0",
+          "validator": [0,1],
+          "validator_type": "choice"
         },
         {
           "name": "requirePrivacy",
-          "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
-        },
-        {
-          "name": "persist",
-          "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
-        },
-        {
-          "name": "force",
           "type": "Short",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Set to `1` to require SMBv3 connection (default: `0`)",
+          "required": false,
+          "default": "0",
+          "validator": [0,1],
+          "validator_type": "choice"
         }
       ]
     },
@@ -1991,38 +2000,38 @@
         {
           "name": "cmd",
           "type": "Short",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Hardcoded to `3`.",
+          "required": false,
+          "default": "3",
+          "validator": [3],
+          "validator_type": "choice"
         },
         {
-          "name": "pswzShareName",
+          "name": "pswzDeviceName",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Drive letter (e.g. `X:`) or share to unmap (`\\\\<computer name>\\<share>`).",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^\\\\\\\\[^\\\\]+(\\\\[^\\\\]+)+$|^[A-Z]:$",
+          "validator_type": "regex"
         },
         {
           "name": "persist",
           "type": "Short",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Set to `1` to remove persistent mapping (default: `0`).",
+          "required": false,
+          "default": "0",
+          "validator": [0,1],
+          "validator_type": "choice"
         },
         {
-          "name": "requirePrivacy",
+          "name": "force",
           "type": "Short",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Set to `1` to force the unmap (default: `0`).",
+          "required": false,
+          "default": "0",
+          "validator": [0,1],
+          "validator_type": "choice"
         }
       ]
     },
@@ -2063,20 +2072,20 @@
         {
           "name": "cmd",
           "type": "Short",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Hardcoded to `2`.",
+          "required": false,
+          "default": "2",
+          "validator": [2],
+          "validator_type": "choice"
         },
         {
           "name": "pswzShareName",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Empty to list all bound connections, give a a drive letter (e.g. `X:`) or UNC path (`\\\\<computer name>\\<share>`) to list a specific connection.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^$|^\\\\\\\\[^\\\\]+(\\\\[^\\\\]+)+$|^[A-Z]:$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -2114,20 +2123,20 @@
         {
           "name": "username",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Username to get info on.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "domain",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Domain to query against (default: empty string for local system)",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -2156,11 +2165,11 @@
         {
           "name": "domain",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Netbios name of the domain to query. (default: empty string for current primary domain).",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^[^\\\\.\\s]*$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -2226,29 +2235,29 @@
         {
           "name": "target",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Name to lookup",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "server",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "DNS server to use for resolution (default: empty string for system default).",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^(?!127\\.0\\.0\\.1$).+",
+          "validator_type": "regex"
         },
         {
           "name": "type",
           "type": "Short",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Record type to request: `1`: A, `2`: NS, `3`: MD, `4`: MF, `5`: CNAME, `6`: SOA, `7`: MB, `8`: MG, `9`: MR, `11`: WKS, `12`: PTR, `13`: HINFO, `14`: MINFO, `15`: MX, `16`: TEXT, `17`: RP, `18`: AFSDB, `19`: X25, `20`: ISDN, `21`: RT, `28`: AAAA, `33`: SRV, `65282`: WINSR, `25`: KEY or `255`: ANY (default: A record).",
+          "required": false,
+          "default": "1",
+          "validator": [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 28, 33, 65282, 25, 255],
+          "validator_type": "choice"
         }
       ]
     },
@@ -2286,20 +2295,20 @@
         {
           "name": "host",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "IP address to probe.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "(\\d{1,3}\\.){3}\\d{1,3}",
+          "validator_type": "regex"
         },
         {
           "name": "port",
           "type": "Int",
-          "description": "TODO",
+          "description": "Port to probe.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "1|65535",
+          "validator_type": "minmax"
         }
       ]
     },
@@ -2339,47 +2348,47 @@
         {
           "name": "hostname",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Hostname to query the registry on (default: empty string for localhost)(format: `\\\\<hostname>`).",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^$|^\\\\\\\\[^\\\\]+$",
+          "validator_type": "regex"
         },
         {
           "name": "t",
           "type": "Int",
-          "description": "TODO",
+          "description": "Hive to query: `0`: HKCR, `1`: HKCU, `2`: HKLM or `3`: HKU.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": [0, 1, 2, 3],
+          "validator_type": "choice"
         },
         {
           "name": "path",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Registry path to key to query",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "key",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Name of the value inside `path` to retrieve (default: empty string to enumerate subkeys/values in `path`).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "recursive",
           "type": "Int",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Hardcoded to 0.",
+          "required": false,
+          "default": "0",
+          "validator": [0],
+          "validator_type": "choice"
         }
       ]
     },
@@ -2419,47 +2428,47 @@
         {
           "name": "hostname",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Hostname to query the registry on (default: empty string for localhost)(format: `\\\\<hostname>`).",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^$|^\\\\\\\\[^\\\\]+$",
+          "validator_type": "regex"
         },
         {
           "name": "t",
           "type": "Int",
-          "description": "TODO",
+          "description": "Hive to query: `0`: HKCR, `1`: HKCU, `2`: HKLM or `3`: HKU.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": [0, 1, 2, 3],
+          "validator_type": "choice"
         },
         {
           "name": "path",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Registry path to key to query",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "key",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Must be empty string",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^$",
+          "validator_type": "regex"
         },
         {
           "name": "recursive",
           "type": "Int",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Hardcoded to 1.",
+          "required": false,
+          "default": "1",
+          "validator": [1],
+          "validator_type": "choice"
         }
       ]
     },
@@ -2491,11 +2500,11 @@
         {
           "name": "hostname",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Computername to enumerate sessions on (default: empty string for localhost).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -2578,11 +2587,11 @@
         {
           "name": "hostname",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Computername to enumerate services on (default: empty string for local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -2616,20 +2625,20 @@
         {
           "name": "hostname",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Computername to enumerate `servicename` (default: empty string for local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "servicename",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Service to get the config from.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^[^\\\\/]{1,256}$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -2662,20 +2671,20 @@
         {
           "name": "hostname",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Computername to enumerate `servicename` (default: empty string for local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "servicename",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Service to get the description from.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^[^\\\\/]{1,256}$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -2708,20 +2717,20 @@
         {
           "name": "hostname",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Computername to enumerate `servicename` (default: empty string for local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "servicename",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Service to get the faiure actions from.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^[^\\\\/]{1,256}$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -2756,20 +2765,20 @@
         {
           "name": "hostname",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Computername to enumerate `servicename` (default: empty string for local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "servicename",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Service to list the triggers from.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^[^\\\\/]{1,256}$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -2803,20 +2812,20 @@
         {
           "name": "hostname",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Computername to enumerate `servicename` (default: empty string for local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "servicename",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Specific service to query.",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^[^\\\\/]{0,256}$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -2852,11 +2861,11 @@
         {
           "name": "hostname",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Server name to enumerate scheduled tasks on (default: empty string for local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -2892,20 +2901,20 @@
         {
           "name": "hostname",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Server name to enumerate scheduled tasks on (default: empty string for local system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "taskname",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Full path of scheduled task to query.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^(\\\\[^\\\\]+)+$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -2944,11 +2953,11 @@
         {
           "name": "file",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Path to file to compute hash over.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -2987,11 +2996,11 @@
         {
           "name": "server",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Path to file to compute hash over.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -3037,11 +3046,11 @@
         {
           "name": "server",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "WMI namespace to use for process listing (format: `\\\\<hostname>\\root\\cimv2`)(default: `.` for local system).",
           "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "default": "\\\\.\\root\\cimv2",
+          "validator": "^\\\\\\\\[^\\\\]+\\\\root\\\\cimv2$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -3096,20 +3105,20 @@
         {
           "name": "usedomain",
           "type": "Int",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Hardcoded as `0`.",
+          "required": false,
+          "default": "0",
+          "validator": [0],
+          "validator_type": "choice"
         },
         {
           "name": "userfilter",
           "type": "Int",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Filter accounts on: `1`: all, `2`: locked, `3`: disabled or `4`: active.",
+          "required": false,
+          "default": "1",
+          "validator": [1,2,3,4],
+          "validator_type": "choice"
         }
       ]
     },
@@ -3164,20 +3173,20 @@
         {
           "name": "hostname",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Hostname to search for volume snapshots.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^[^\\\\]+$",
+          "validator_type": "regex"
         },
         {
           "name": "sharename",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Share name to search for volumes (default: `C$`).",
+          "required": false,
+          "default": "C$",
+          "validator": "^[^\\\\]+$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -3238,11 +3247,11 @@
         {
           "name": "ALL",
           "type": "Int",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Set to `1` to see every possible window (default: `0`)",
+          "required": false,
+          "default": "0",
+          "validator": [0,1],
+          "validator_type": "choice"
         }
       ]
     },
@@ -3288,38 +3297,38 @@
         {
           "name": "pwszServer",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Is ignored, leave empty.",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^$",
+          "validator_type": "regex"
         },
         {
           "name": "pwszNameSpace",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Is ignored, leave empty.",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^$",
+          "validator_type": ""
         },
         {
           "name": "pwszQuery",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Valid WQL query(e.g. `SELECT * FROM Win32_Process`).",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "pwszResource",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Resource to access format: `\\\\<hostname>\\<namespace>` (default: `\\\\.\\root\\cimv2`).",
           "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "default": "\\\\.\\root\\cimv2",
+          "validator": "^\\\\\\\\[^\\\\]+(\\\\[^\\\\]+)+$",
+          "validator_type": "regex"
         }
       ]
     }
