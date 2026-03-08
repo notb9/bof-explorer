@@ -19,8 +19,6 @@ function App() {
   }
 
   const callback = (bof: Bof | null) => {
-    console.log("Loading bof: " + bof?.name);
-    console.log("code:\n" + bof?.code);
     setBof(() => bof);
   };
 
@@ -56,7 +54,7 @@ function App() {
             </Accordion>
             <Tabs defaultActiveKey="parameters">
               <Tab eventKey="parameters" title="Arguments" className="py-3">
-                <ParameterPane bof={bof} />
+                <ParameterPane key={bof.name} bof={bof} />
               </Tab>
               <Tab eventKey="cna" title="CNA" className="py-3">
                 <h2> CNA </h2>
