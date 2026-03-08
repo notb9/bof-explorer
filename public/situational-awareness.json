@@ -1541,8 +1541,8 @@
           "description": "System to query for logged on users.",
           "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": ""
+          "validator": "(^\\\\\\\\[^\\\\]+$|^$)",
+          "validator_type": "regex"
         }
       ]
     },
@@ -1707,8 +1707,8 @@
           "description": "System to query for shares (default local system).",
           "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": ""
+          "validator": "(^\\\\\\\\[^\\\\]+$|^$)",
+          "validator_type": "regex"
         },
         {
           "name": "asAdmin",
@@ -1750,8 +1750,8 @@
           "description": "System to query for shares (default local system).",
           "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": ""
+          "validator": "(^\\\\\\\\[^\\\\]+$|^$)",
+          "validator_type": "regex"
         },
         {
           "name": "asAdmin",
@@ -1859,8 +1859,8 @@
           "description": "Server to query for uptime (default: localhost on empty string).",
           "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": ""
+          "validator": "(^\\\\\\\\[^\\\\]+$|^$)",
+          "validator_type": "regex"
         }
       ]
     },
