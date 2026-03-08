@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useId } from "react";
 import { Form, InputGroup, Button } from "react-bootstrap";
 import type { Bof, BofArg } from "../types";
 import { TerminalCommand } from "./TerminalCommand";
@@ -84,6 +84,7 @@ type ParameterInputProps = {
 
 function ParameterInput({ param, register, error }: ParameterInputProps) {
   let input = null;
+  const id = useId();
 
   const rules = buildRules(param);
 
@@ -99,6 +100,7 @@ function ParameterInput({ param, register, error }: ParameterInputProps) {
               : param.name
           }
           defaultValue={param.default}
+          id={id}
           {...register(param.name, rules)}
         />
       );
@@ -112,6 +114,7 @@ function ParameterInput({ param, register, error }: ParameterInputProps) {
           step={1}
           placeholder={param.name}
           defaultValue={param.default}
+          id={id}
           {...register(param.name, rules)}
         />
       );
@@ -121,6 +124,7 @@ function ParameterInput({ param, register, error }: ParameterInputProps) {
       input = (
         <Form.Control
           type="file"
+          id={id}
           multiple={false}
           {...register(param.name, { required: param.required })}
         />
@@ -202,6 +206,8 @@ type ParameterPaneProps = {
 
 type DynamicFormValues = Record<string, unknown>;
 
+
+// TODO: Unregister the form on change of bof
 export function ParameterPane({ bof }: ParameterPaneProps) {
   const [command, setCommand] = useState("");
 
@@ -212,7 +218,6 @@ export function ParameterPane({ bof }: ParameterPaneProps) {
   } = useForm<DynamicFormValues>({ mode: "onTouched" });
 
   const onSubmit = (data: DynamicFormValues) => {
-    console.log("Form data:", data);
     packParams(bof.args, data).then((val) => {
       setCommand(
         '.\\CoffLoader.exe "' +
