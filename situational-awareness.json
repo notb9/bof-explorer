@@ -519,9 +519,9 @@
           "type": "UnicodeString",
           "description": "File or directory to get ACL of.",
           "required": true,
-          "default": ".",
-          "validator": "",
-          "validator_type": ""
+          "default": "",
+          "validator": "^(?!\\\\).+",
+          "validator_type": "regex"
         }
       ]
     },
@@ -2135,7 +2135,7 @@
           "name": "pswzShareName",
           "type": "UnicodeString",
           "description": "Empty to list all bound connections, give a a drive letter (e.g. `X:`) or UNC path (`\\\\<computer name>\\<share>`) to list a specific connection.",
-          "required": true,
+          "required": false,
           "default": "",
           "validator": "^$|^\\\\\\\\[^\\\\]+(\\\\[^\\\\]+)+$|^[A-Z]:$",
           "validator_type": "regex"
