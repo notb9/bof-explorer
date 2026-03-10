@@ -224,20 +224,20 @@
         {
           "name": "taskName",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Name of the tast.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "hostName",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "The FQDN of the host (default: empty string for the current system).",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "(^[^\\\\]+$|^$)",
+          "validator_type": "regex"
         }
       ]
     },
@@ -279,47 +279,47 @@
         {
           "name": "sysrootPath",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Path that will be used as the new SYSTEMROOT variable (e.g. `C:\\Data\\`).",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^[A-Z]:.+\\\\^",
+          "validator_type": "regex"
         },
         {
           "name": "proxyDll",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Name of the malicious DLL that will be loaded.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^.+\\.dll$",
+          "validator_type": "regex"
         },
         {
           "name": "inputDllSrcPath",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Path on target system that contains the malicous DLL (from `proxyDll`, do not append the DLL name).",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^[A-Z]:.+\\\\^",
+          "validator_type": "regex"
         },
         {
           "name": "targetProc",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Name of the vulnerable binary to execute.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^.+\\.exe$",
+          "validator_type": "regex"
         },
         {
           "name": "pid",
           "type": "Int",
-          "description": "TODO",
+          "description": "Parent proces ID under which the process will be spawned.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "1",
+          "validator_type": "min"
         }
       ]
     },
@@ -369,29 +369,29 @@
         {
           "name": "lpDirectory",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Directory from which to start searching.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^.*[^\\\\]$",
+          "validator_type": "regex"
         },
         {
           "name": "lpSearchPattern",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Single word or extention to search for (supports wildcards).",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "keyword",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Leave empty, or specify a keyword to search for in text based files (supports wildcards).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -447,20 +447,20 @@
         {
           "name": "exclType",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Exclusion type: `path`, `process` or `extension`.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["path", "process", "extension"],
+          "validator_type": "choice"
         },
         {
           "name": "exclData",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "String that describes the exclusion condition.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -510,29 +510,29 @@
         {
           "name": "title",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Title of the prompt window.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "message",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Message to display in the prompt window.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "timer_seconds",
           "type": "Int",
-          "description": "TODO",
+          "description": "Number of seconds before auto closing the window.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "1",
+          "validator_type": "min"
         }
       ]
     },
@@ -602,11 +602,11 @@
         {
           "name": "hostFileBytes",
           "type": "Binary",
-          "description": "TODO",
+          "description": "File containing one hostname or ip address per line.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -640,11 +640,11 @@
         {
           "name": "option",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Type of security products to query.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["av", "fw", "as"],
+          "validator_type": "choice"
         }
       ]
     },
@@ -686,11 +686,11 @@
         {
           "name": "store",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Certificate store to enumerate.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -760,47 +760,47 @@
         {
           "name": "usernameFileBytes",
           "type": "Binary",
-          "description": "TODO",
+          "description": "File containing usernames seperated by newlines (`\\r\\n`).",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "wPassword",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Password to spray against the supplied users.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "wDomain",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "FQDN of the domain to target.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "sleepDuration",
           "type": "Int",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Time to wait between authentication attempts (default: `0`).",
+          "required": false,
+          "default": "0",
+          "validator": "0",
+          "validator_type": "min"
         },
         {
           "name": "jitterPercent",
           "type": "Int",
-          "description": "TODO",
-          "required": true,
-          "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "description": "Jitter to apply to the wait intervals (default: `0`).",
+          "required": false,
+          "default": "0",
+          "validator": "0",
+          "validator_type": "min"
         }
       ]
     },
@@ -883,11 +883,11 @@
         {
           "name": "w_ruleName",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Name of the rule to delete.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -952,11 +952,11 @@
         {
           "name": "action",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Action to take: `suspend` or `resume`.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["suspend", "resume"],
+          "validator_type": "choice"
         }
       ]
     },
@@ -987,11 +987,11 @@
         {
           "name": "pid",
           "type": "Int",
-          "description": "TODO",
+          "description": "Process id of the sysmon process.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "1",
+          "validator_type": "min"
         }
       ]
     },
@@ -1027,11 +1027,11 @@
         {
           "name": "hostName",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Hostname of the system to enumerate (default: empty string for the current system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1063,20 +1063,20 @@
         {
           "name": "exclType",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Exclusion type: `path`, `process` or `extension`.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["path", "process", "extension"],
+          "validator_type": "choice"
         },
         {
           "name": "exclData",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "String that describes the exclusion condition.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1121,20 +1121,29 @@
         {
           "name": "search",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Type of enumeration to do: `all`, `h2p` or `p2h`.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["all", "h2p", "p2h"],
+          "validator_type": "choice"
         },
         {
           "name": "query",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Type of handles to query.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["proc", "thread"],
+          "validator_type": "choice"
+        },
+        {
+          "name": "basePid",
+          "type": "Int",
+          "description": "Specify a PID in case of `h2p` or `p2h`.",
+          "required": false,
+          "default": "",
+          "validator": "1",
+          "validator_type": "min"
         }
       ]
     },
@@ -1201,11 +1210,11 @@
         {
           "name": "hostName",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Hostname or ip address of system to enumerate security products on (default: empty string for current system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1243,20 +1252,20 @@
         {
           "name": "pID",
           "type": "Int",
-          "description": "TODO",
+          "description": "Target process to load the DLL.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "1",
+          "validator_type": "min"
         },
         {
           "name": "pathToDLL",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Absolute path to the DLL to be loaded",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^([A-Z]:(\\\\[^\\\\]+)+|)$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -1285,20 +1294,20 @@
         {
           "name": "store",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Store to delete the cert from.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "thumbprint",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Thumbprint of the certificate to delete.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^[A-F0-9]+$",
+          "validator_type": "regex"
         }
       ]
     },
@@ -1334,20 +1343,20 @@
         {
           "name": "hostFileBytes",
           "type": "Binary",
-          "description": "TODO",
+          "description": "File containing hostsnames (seperated with `\r\n`).",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "debug",
           "type": "AnsiString",
-          "description": "TODO",
-          "required": true,
+          "description": "Set to `debug` to print unreachable hosts.",
+          "required": false,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["", "debug"],
+          "validator_type": "choice"
         }
       ]
     },
@@ -1380,65 +1389,83 @@
         {
           "name": "taskName",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Name of the scheduled task.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "hostName",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "FQDN of the system to add the task to (default: empty string for current system).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "programPath",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Path to executable to start.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "programArguments",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Arguments to start the `programPath` with (default: empty string for none).",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "triggerType",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Trigger for the scheduled task.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["onetime", "daily", "logon", "startup", "lock", "unlock"],
+          "validator_type": "choice"
         },
         {
-          "name": "startTime",
+          "name": "optionalArg1",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "See description for details.",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
-          "name": "repeatTask",
+          "name": "optionalArg2",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "See description for details.",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
+        },
+        {
+          "name": "optionalArg3",
+          "type": "Int",
+          "description": "See description for details.",
+          "required": false,
+          "default": "",
+          "validator": "",
+          "validator_type": ""
+        },
+        {
+          "name": "optionalArg4",
+          "type": "UnicodeString",
+          "description": "See description for details.",
+          "required": false,
+          "default": "",
+          "validator": "",
+          "validator_type": ""
         }
       ]
     },
@@ -1470,11 +1497,11 @@
         {
           "name": "hostName",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "FQDN or ip addres of the remote system",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1513,29 +1540,29 @@
         {
           "name": "option",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Thread pool variant: `TP_TIMER`, `TP_DIRECT` or `TP_WORK`.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["TP_TIMER", "TP_DIRECT", "TP_WORK"],
+          "validator_type": "choice"
         },
         {
           "name": "pid",
           "type": "Int",
-          "description": "TODO",
+          "description": "The ID of the process to target.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "1",
+          "validator_type": "min"
         },
         {
           "name": "code",
           "type": "Binary",
-          "description": "TODO",
+          "description": "Shellcode to inject into the remote process.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1559,20 +1586,20 @@
         {
           "name": "clsidString",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "CLSID to instantiate.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "^\\{[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}\\}$",
+          "validator_type": "regex"
         },
         {
           "name": "host",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "FQDN, hostname or IP address to trigger.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1615,20 +1642,26 @@
         {
           "name": "option",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Action to execute: `search` or `list`.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["search", "list"],
+          "validator_type": "choice"
         },
         {
           "name": "pid",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "PID or Module name.",
           "required": true,
           "default": "",
           "validator": "",
           "validator_type": "regex|minmax|choice|min|max"
+        }
+      ],
+      "notes": [
+        {
+          "type": "warning",
+          "msg": "Command generator does not work for the `pid` argument as it can have type `z` or `i`."
         }
       ]
     },
@@ -1656,20 +1689,20 @@
         {
           "name": "option",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Type of object to hide: `file` or `dir`",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["file", "dir"],
+          "validator_type": "choice"
         },
         {
           "name": "path",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Path to file or directory.",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     },
@@ -1699,20 +1732,20 @@
         {
           "name": "programPath",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Path to the program to execute",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": "regex"
         },
         {
           "name": "session",
           "type": "Int",
-          "description": "TODO",
+          "description": "Session in which to execute.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "0",
+          "validator_type": "min"
         }
       ]
     },
@@ -1738,47 +1771,47 @@
         {
           "name": "directionOption",
           "type": "AnsiString",
-          "description": "TODO",
+          "description": "Direction of traffic: `in` or `out`.",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": ["in", "out"],
+          "validator_type": "choice"
         },
         {
           "name": "w_localPorts",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Port to apply the rule to",
           "required": true,
           "default": "",
-          "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator": "1|65355",
+          "validator_type": "minmax"
         },
         {
           "name": "w_ruleName",
           "type": "UnicodeString",
-          "description": "TODO",
+          "description": "Name of the new rule",
           "required": true,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "w_ruleGroup",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Name of the rule group to add the new rule to.",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         },
         {
           "name": "w_ruleDescription",
           "type": "UnicodeString",
-          "description": "TODO",
-          "required": true,
+          "description": "Description to add to the new rule.",
+          "required": false,
           "default": "",
           "validator": "",
-          "validator_type": "regex|minmax|choice|min|max"
+          "validator_type": ""
         }
       ]
     }
