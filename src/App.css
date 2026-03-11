@@ -20,3 +20,8 @@
 .bof-usage {
   white-space: pre-wrap;
 }
+
+.footer a {
+  text-decoration: none;
+  --bs-link-color-rgb: var(--bs-body-color)
+}
