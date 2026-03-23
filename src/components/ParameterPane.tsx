@@ -220,7 +220,7 @@ export function ParameterPane({ bof }: ParameterPaneProps) {
   const onSubmit = (data: DynamicFormValues) => {
     packParams(bof.args, data).then((val) => {
       setCommand(
-        '.\\CoffLoader.exe go "' +
+        'CoffLoader64.exe go "' +
           bof.bin_path +
           '" "' +
           bufferToHex(val) +
@@ -248,7 +248,7 @@ export function ParameterPane({ bof }: ParameterPaneProps) {
       {bof.args.length === 0 && (
         <>
           <TerminalCommand
-            content={'.\\CoffLoader go "' + bof.bin_path + "\" ''"}
+            content={'CoffLoader64.exe go "' + bof.bin_path + "\" ''"}
           />
         </>
       )}
