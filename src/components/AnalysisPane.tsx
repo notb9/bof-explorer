@@ -36,7 +36,7 @@ export function AnalysisPane({ bof }: AnalysisPaneProps) {
   ];
 
   return (
-    <>
+    <div>
       <p>Overview of the runtime effects of the BOF:</p>
       <Accordion defaultActiveKey="0" className="px-0 mb-4 flush">
         <Accordion.Item eventKey="0">
@@ -78,6 +78,6 @@ export function AnalysisPane({ bof }: AnalysisPaneProps) {
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
-    </>
+    </div>
   );
 }

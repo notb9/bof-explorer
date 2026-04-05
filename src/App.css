@@ -4,8 +4,19 @@
 }
 
 .app-panel {
-  max-width: 900px !important;
+  max-width: 900px;
   width: 100%;
+  border: var(--bs-border-width) solid var(--bs-dark-text-emphasis);
+  border-radius: var(--bs-border-radius);
+  position: relative;
+}
+
+.app-settings-icon {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.7rem;
+  font-size: 1.25rem;
+  cursor: pointer;
 }
 
 .tab-content {
@@ -23,5 +34,5 @@
 
 .footer a {
   text-decoration: none;
-  --bs-link-color-rgb: var(--bs-body-color)
+  --bs-link-color-rgb: var(--bs-body-color);
 }

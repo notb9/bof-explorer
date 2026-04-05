@@ -1,3 +1,4 @@
+import { Files } from "react-bootstrap-icons";
 import "./TerminalCommand.css";
 
 type TerminalCommandProps = {
@@ -12,7 +13,7 @@ export function TerminalCommand({ content }: TerminalCommandProps) {
         onClick={() => navigator.clipboard.writeText(content)}
         title="Copy to clipboard"
       >
-        <i className="bi bi-files"></i>
+        <Files />
       </button>
     </div>
   );
