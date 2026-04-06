@@ -9,6 +9,7 @@ export interface UserSettings {
 export interface UserSettingsContextType {
   settings: UserSettings;
   updateSettings: (newSettings: Partial<UserSettings>) => void;
+  resetSettings: () => void;
 }
 
 export const UserSettingsContext = createContext<
